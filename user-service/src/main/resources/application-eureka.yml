@@ -1,0 +1,29 @@
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB # 限制文件上传的大小
+  cloud:
+    loadbalancer:
+      retry:
+        enabled: true # 开启Spring Cloud的重试功能
+eureka:
+  client:
+    service-url: # EurekaServer地址
+      defaultZone: http://127.0.0.1:10086/eureka
+instance:
+  prefer-ip-address: true # 当调用getHostname获取实例的hostname时，返回ip而不是host名称
+  ip-address: 127.0.0.1 # 指定自己的ip信息，不指定的话会自己寻找
+  instance-id: ${spring.application.name}:${server.port}
+user-service:
+  ribbon:
+    ConnectTimeout: 250 # Ribbon的连接超时时间
+    ReadTimeout: 1000 # Ribbon的数据读取超时时间
+    OkToRetryOnAllOperations: true # 是否对所有操作都进行重试
+    MaxAutoRetriesNextServer: 1 # 切换实例的重试次数
+    MaxAutoRetries: 0 # 对当前实例的重试次数
+# 阿里云对象存储配置信息
+aliyun:
+  endpoint: oss-cn-beijing.aliyuncs.com
+  accessKeyId: LTAISMHjfgHmhyPP
+  accessKeySecret: DFRJHeYMgguVFrPfddEcnSnzS6u1qD
+  bucketName: wpp-wx
